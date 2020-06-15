@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Position Practice</title>
+    <link rel="stylesheet" type="text/css" href="users.scss">
+  </head>
+  <body>
+    <div id="main_content">
+      <h2>Pictures</h2>
+
+      <% @user.pictures.each do |picture| %>
+        <div><%= link_to (image_tag picture.image_url, :size => "260x180"), picture %></div>
+        <%= link_to picture.title, picture %>
+      <% end %>
+
+      <%= form_for @picture do |f|  %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+
+        <p>Tags</p>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag|%>
+          <%= tag.label class:"label-checkbox" do%>
+            <%=tag.check_box + tag.text%>
+          <%end%>
+        <%end%>
+
+        <p>Please make a new tag</p>
+        <%= f.fields_for :tags, @picture.tags.build do |tags_fields| %>
+          <%= tags_fields.text_field :name %>
+        <% end %>
+
+        <%= f.label :image_url %>
+        <%= f.text_field :image_url %><br>
+  
+        <%= f.label :title %>
+        <%= f.text_field :title %><br>
+  
+        <%= f.submit "Create Picture" %>
+      <% end %>
+
+      <%= link_to "Edit User", edit_user_path %>
+      <%= link_to "Delete User", @user, method: :delete, data: { confirm: "Are you sure you want to delete your account?" } %>
+    </div><!-- end of main_content -->
+  </body>
+</html>
