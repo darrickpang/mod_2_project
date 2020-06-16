@@ -1,14 +1,20 @@
 <h3>Title: <%= @picture.title %></h3>
-<%= image_tag @picture.image_url, :size => "260x180" %> <br>
+<div class="image">
+  <%= image_tag @picture.image_url, :width => "100%", :height => "100%" %>
+</div> 
 <p>Tags: <% @picture.tags.each do |tag| %>
-  <%= tag.name %>
+  <%= tag.name %><br>
 <% end %></p>
 <%= form_for @comment do |f|  %>
-  <%= f.hidden_field :comment_id, value: @comment.id %>
+  <%= f.hidden_field :picture_id, value: @picture.id %>
   
   <%= f.label :comment %>
   <%= f.text_field :content %><br>
-    
+  
   <%= f.submit "Post comment" %>
 <% end %>
-
+<% @picture.comments.each do |comment| %>
+  <%= comment.content %>
+<% end %>
+<%= link_to "Edit Picture", edit_picture_path %>
+<%= link_to "Delete Picture", @picture, method: :delete, data: { confirm: "Are you sure you want to delete this picture?" } %>

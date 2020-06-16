@@ -14,10 +14,13 @@ class PicturesController < ApplicationController
 
   def edit
     @picture = Picture.find(params[:id])
+    @tag 
   end
 
   def update
-
+    @picture = Picture.find(params[:id])
+    @picture.update(picture_params)
+    redirect_to picture_path(@picture)
   end
 
   def create
@@ -26,8 +29,12 @@ class PicturesController < ApplicationController
     redirect_to user_path(@picture.user_id)
   end
 
+  def destroy
+    @picture = Picture.find(params[:id]).destroy
+    redirect_to user_path(@picture.user_id)
+  end
   private
-    def picture_params
-      params.require(:picture).permit(:image_url, :title, :user_id, tag_attributes:[], tag_ids:[], tags_attributes: [:name])
-    end
+  def picture_params
+    params.require(:picture).permit(:image_url, :title, :user_id, tag_attributes:[], tag_ids:[], tags_attributes: [:name])
+  end
 end

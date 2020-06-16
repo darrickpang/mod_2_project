@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :comments, only: [:index, :show, :create]
   resources :tags, only: [:index, :show]
-  resources :pictures, only: [:index, :show, :create]
+  resources :pictures, only: [:index, :show, :create, :edit, :update, :destroy]
   resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
   
   get "/signup", to: "users#new", as: :signup

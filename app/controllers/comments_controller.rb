@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.save
-    #redirect_to picture_path(@comment.picture_id)
+    redirect_to picture_path(@comment.picture_id)
   end
 
   private

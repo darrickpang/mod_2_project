@@ -16,8 +16,12 @@
 }
 #main_content{
     min-height: 400px;
-    width: 700px;
+    width: 800px;
     display: inline-block;
     vertical-align: top;
     margin: 10px;
+}
+.image{
+    height: auto;
+    max-width: 95%;
 }
