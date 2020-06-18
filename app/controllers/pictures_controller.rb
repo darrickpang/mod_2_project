@@ -14,7 +14,7 @@ class PicturesController < ApplicationController
 
   def edit
     @picture = Picture.find(params[:id])
-    @tag 
+   
   end
 
   def update
@@ -35,6 +35,6 @@ class PicturesController < ApplicationController
   end
   private
   def picture_params
-    params.require(:picture).permit(:image_url, :title, :user_id, tag_attributes:[], tag_ids:[], tags_attributes: [:name])
+    params.require(:picture).permit(:image_url, :title, :user_id, tag_attributes:[], tag_ids:[], tags_attributes: [:name], comments_attributes: [:content])
   end
 end

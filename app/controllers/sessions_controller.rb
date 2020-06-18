@@ -1,13 +1,12 @@
 class SessionsController < ApplicationController
     def new
     end 
-    #byebug
+
     def create
         user = User.find_by(username: user_params[:username])
         user = user.try(:authenticate, user_params[:password])
         @user = user
         session[:user_id] = @user.id
-        #byebug
         redirect_to user_path(@user) 
     end
     

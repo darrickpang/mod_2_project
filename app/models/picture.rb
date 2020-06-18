@@ -5,7 +5,6 @@ class Picture < ApplicationRecord
     has_many :tags, through: :picture_tags
 
     accepts_nested_attributes_for :tags
-    accepts_nested_attributes_for :comments
 
     def tags_attributes=(tag_attributes)
         tag_attributes.values.each do |tag_attribute|

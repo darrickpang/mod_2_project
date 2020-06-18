@@ -5,16 +5,21 @@
 <p>Tags: <% @picture.tags.each do |tag| %>
   <%= tag.name %><br>
 <% end %></p>
-<%= form_for @comment do |f|  %>
+<%= form_for @comment do |f| %>
   <%= f.hidden_field :picture_id, value: @picture.id %>
+  <%= f.hidden_field :user_id, value: session[:user_id] %>
   
   <%= f.label :comment %>
   <%= f.text_field :content %><br>
   
-  <%= f.submit "Post comment" %>
+  <button type="submit">Post Comment</button>
 <% end %>
+
+Comments: <br>
 <% @picture.comments.each do |comment| %>
-  <%= comment.content %>
-<% end %>
+  <%= link_to comment.user.username, user_path(comment.user) %> said:
+  <%= comment.content %><br>
+<% end %><br>
+
 <%= link_to "Edit Picture", edit_picture_path %>
 <%= link_to "Delete Picture", @picture, method: :delete, data: { confirm: "Are you sure you want to delete this picture?" } %>

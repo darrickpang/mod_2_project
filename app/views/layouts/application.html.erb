@@ -14,7 +14,7 @@
       
       <% if logged_in? %>
         <div id="header">
-          <h1>Welcome back, <%= current_user.username %>!</h1>
+          <h1 class="welcome">Welcome back, <%= current_user.username %>!</h1>
           <%= link_to "Log out", '/logout', method: 'delete' %>
         </div>
       <% else %>
